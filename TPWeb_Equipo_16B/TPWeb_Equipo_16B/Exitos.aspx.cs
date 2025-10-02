@@ -7,15 +7,15 @@ using System.Web.UI.WebControls;
 
 namespace TPWeb_Equipo_16B
 {
-    public partial class Articulos : System.Web.UI.Page
+    public partial class Exitos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        protected void btnPrueba_Click(object sender, EventArgs e)
+        protected void btnInicio_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Formulario.aspx");
+            Response.Redirect("Codigo.aspx");
         }
     }
 }

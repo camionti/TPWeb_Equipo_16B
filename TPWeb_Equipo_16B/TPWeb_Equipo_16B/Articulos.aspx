@@ -3,4 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <h1>ACA VAN LOS TRES ARTICULOS</h1>
+      <asp:Button Text="Prueba" CssClass="btn btn-primary"
+              ID="btnPrueba" runat="server"
+              OnClick="btnPrueba_Click" />
 </asp:Content>

@@ -50,13 +50,12 @@ namespace TPWeb_Equipo_16B
                     lblMensaje.Visible = true;
                     return;
                 }
-
+          
                 ClienteNegocio negocio = new ClienteNegocio();
                 negocio.Agregar(nuevo);
 
-                lblMensaje.CssClass = "text-success";
-                lblMensaje.Text = "¡Cliente registrado exitosamente!";
-                lblMensaje.Visible = true;
+             
+                Response.Redirect("Exitos.aspx");
             }
             catch (Exception ex)
             {
