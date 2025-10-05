@@ -1,5 +1,5 @@
-﻿using System;
-using Negocio;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,18 +9,28 @@ using System.Web.UI.WebControls;
 
 namespace TPWeb_Equipo_16B
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Default : System.Web.UI.Page
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
 
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
             string codigoIngresado = txtCodigo.Text.Trim();
             VoucherNegocio negocio = new VoucherNegocio();
 
-            if (negocio.ValidarCodigo(codigoIngresado))
+            if (string.IsNullOrEmpty(codigoIngresado))
+            {
+                lblError.Text = "Debe escribir un código.";
+                lblError.Visible = true;
+            }
+            else if (negocio.ValidarCodigo(codigoIngresado))
             {
                 //codigo valido
-                Response.Redirect("Articulos.aspx?codigo=" + codigoIngresado);
+                Session.Add("CodigoVoucher", codigoIngresado);
+                Response.Redirect("Articulos.aspx");
             }
             else
             {
@@ -29,5 +39,7 @@ namespace TPWeb_Equipo_16B
                 lblError.Visible = true;
             }
         }
+
+
     }
 }

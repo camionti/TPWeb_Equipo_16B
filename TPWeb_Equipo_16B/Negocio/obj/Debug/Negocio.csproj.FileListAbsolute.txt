@@ -7,3 +7,12 @@ D:\Desktop\PROGRAMACION III\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\
 D:\Desktop\PROGRAMACION III\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\bin\Debug\Dominio.dll
 D:\Desktop\PROGRAMACION III\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\bin\Debug\Dominio.pdb
 D:\Desktop\PROGRAMACION III\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\Negocio.csproj.Up2Date
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\bin\Debug\Negocio.dll
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\bin\Debug\Dominio.dll
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\bin\Debug\Dominio.pdb
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\Negocio.csproj.Up2Date
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\Negocio.dll
+C:\Users\Renzo\Desktop\TPWeb_Equipo_16B\TPWeb_Equipo_16B\Negocio\obj\Debug\Negocio.pdb

@@ -10,44 +10,56 @@ namespace Negocio
 {
     public class ClienteNegocio
     {
-        private string connectionString = "Server=.;Database=PROMOS_DB;Trusted_Connection=True;";
 
         public List<Cliente> Listar()
         {
             List<Cliente> lista = new List<Cliente>();
-            using (SqlConnection conexion = new SqlConnection(connectionString))
-            {
-                conexion.Open();
-                SqlCommand comando = new SqlCommand("SELECT Id, Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP FROM Clientes", conexion);
-                SqlDataReader lector = comando.ExecuteReader();
+            AccesoDatos datos = new AccesoDatos();
 
-                while (lector.Read())
+            try
+            {
+                datos.setearConsulta("SELECT Id, Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP FROM Clientes");
+                datos.ejecutarLectura();
+
+                while(datos.Lector.Read())
                 {
                     Cliente cli = new Cliente
                     {
-                        Id = (int)lector["Id"],
-                        Documento = (string)lector["Documento"],
-                        Nombre = (string)lector["Nombre"],
-                        Apellido = (string)lector["Apellido"],
-                        Email = (string)lector["Email"],
-                        Direccion = (string)lector["Direccion"],
-                        Ciudad = (string)lector["Ciudad"],
-                        CP = (int)lector["CP"]
+                        Id = (int)datos.Lector["Id"],
+                        Documento = (string)datos.Lector["Documento"],
+                        Nombre = (string)datos.Lector["Nombre"],
+                        Apellido = (string)datos.Lector["Apellido"],
+                        Email = (string)datos.Lector["Email"],
+                        Direccion = (string)datos.Lector["Direccion"],
+                        Ciudad = (string)datos.Lector["Ciudad"],
+                        CP = (int)datos.Lector["CP"]
                     };
+
                     lista.Add(cli);
                 }
+
+                return lista;
             }
-            return lista;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public void Agregar(Cliente nuevo)
+        public int Agregar(Cliente nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
+                //if (ExisteDNI(int.Parse(nuevo.Documento)))
+                //    throw new InvalidOperationException("Ya existe un cliente con ese DNI.");
+                //if (!string.IsNullOrEmpty(nuevo.Email) && ExisteEmail(nuevo.Email))
+                //    throw new InvalidOperationException("Ya existe un cliente con ese email.");
+
                 datos.setearConsulta("INSERT INTO Clientes " +
                     "(Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP) " +
+                    "OUTPUT INSERTED.Id " +
                     "VALUES (@Documento, @Nombre, @Apellido, @Email, @Direccion, @Ciudad, @CP)");
 
                 datos.setearParametro("@Documento", nuevo.Documento);
@@ -58,7 +70,9 @@ namespace Negocio
                 datos.setearParametro("@Ciudad", nuevo.Ciudad);
                 datos.setearParametro("@CP", nuevo.CP);
 
-                datos.ejecutarAccion();
+                int nuevoId = Convert.ToInt32(datos.ejecutarEscalar());
+
+                return nuevoId;
             }
             catch (Exception ex)
             {
@@ -68,6 +82,80 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public bool ExisteDNI( int dni)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT TOP (1) 1 FROM Clientes WHERE Documento = @dni");
+                datos.setearParametro("@dni", dni);
+                datos.ejecutarLectura();
+                datos.Lector.Read();
+                return Convert.ToInt32(datos.Lector[0]) == 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool ExisteEmail(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT TOP (1) 1 FROM Clientes WHERE Email = @email");
+                datos.setearParametro("@email", email);
+                datos.ejecutarLectura();
+                datos.Lector.Read();
+                return Convert.ToInt32(datos.Lector[0]) == 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Cliente ObtenerPorDocumento(string dni)
+        {
+            var datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT TOP (1) Id, Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP FROM dbo.Clientes WHERE Documento = @dni");
+                datos.setearParametro("@dni", dni);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return new Cliente
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        Documento = (string)datos.Lector["Documento"],
+                        Nombre = (string)datos.Lector["Nombre"],
+                        Apellido = (string)datos.Lector["Apellido"],
+                        Email = (string)datos.Lector["Email"],
+                        Direccion = (string)datos.Lector["Direccion"],
+                        Ciudad = (string)datos.Lector["Ciudad"],
+                        CP = (int)datos.Lector["CP"]
+                    };
+                }
+                return null;
+            }
+            catch (Exception ex) { throw ex; }
+
+            finally { datos.cerrarConexion(); }
         }
 
     }

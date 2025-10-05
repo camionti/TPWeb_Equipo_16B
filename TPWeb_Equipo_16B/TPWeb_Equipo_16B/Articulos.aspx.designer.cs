@@ -15,12 +15,12 @@ namespace TPWeb_Equipo_16B
     {
 
         /// <summary>
-        /// Control btnPrueba.
+        /// Control repArticulos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPrueba;
+        protected global::System.Web.UI.WebControls.Repeater repArticulos;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
 
 namespace TPWeb_Equipo_16B
 {
@@ -15,7 +16,7 @@ namespace TPWeb_Equipo_16B
         }
         protected void btnInicio_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Codigo.aspx");
+            Response.Redirect("Default.aspx");
         }
     }
 }
